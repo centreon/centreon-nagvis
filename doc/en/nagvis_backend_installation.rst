@@ -1,4 +1,4 @@
-NagVis banckend installation
+NagVis backend installation
 ============================
   
 ..  Requirement
@@ -74,7 +74,7 @@ Create some directories needed by NagVis:
   # chown -R apache.apache /usr/local/nagvis
 
 .. note::
-  At this stage, you should be able to connect to NagVis using http://<ip of centreon server>/nagvis, and admin/admin account in order to modify NagVis configruation.
+  At this stage, you should be able to connect to NagVis using http://ip_of_centreon_server/nagvis, and admin/admin account in order to modify NagVis configuration.
   We will describe textual configuration in this documentation.
 
 Edit */usr/local/nagvis/nagvis.ini.php* (comments have been removed in the file below):
