@@ -21,7 +21,7 @@ Requirements
 | **Centreon**               | 2.5.x                   |
 |                            |                         |
 +----------------------------+-------------------------+
-| **Centreon-Nagvis**        | *                       |
+| **Centreon-Nagvis**        | 1.0.x                   |
 |                            |                         |
 +----------------------------+-------------------------+
 | **Nagvis**                 | 1.7.10                  |
@@ -34,5 +34,6 @@ Requirements
 .. note::
 
 	NagVis must be installed on the Centreon server as the web interface is reading NagVis maps (stored as \*.cfg files).
+
 	Graphviz may also be needed depending on the maps. Please refer to the NagVis installation for more information.
 
