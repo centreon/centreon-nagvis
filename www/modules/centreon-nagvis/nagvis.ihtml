@@ -14,11 +14,11 @@ html, body {
 </style>
 {/literal}
 <div class="select-map">
-<select name='view'>
-{foreach from=$listmap item=map}
-<option{if $station == $map} selected="selected"{/if}>{$map}</option>
-{/foreach}
-</select>
+  <select name='view'>
+  {foreach from=$listmap item=map}
+    <option{if $currentMap == $map} selected="selected"{/if}>{$map}</option>
+  {/foreach}
+  </select>
 </div>
 
 <iframe class="map" id="map" src="{$mapurl}" frameborder="0"></iframe>

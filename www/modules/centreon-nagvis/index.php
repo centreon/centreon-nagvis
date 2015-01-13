@@ -80,15 +80,22 @@ chdir($tmpdir);
 sort($listMap);
 
 /* 
- * First map 
+ * Reads map name from URL, if no parameter specified, default to first map of the list
+ * WARNING: the "official" param name is "map", but we keep on reading "station" for compatibility reasons 
+ * over first versions of this module. Some client are using URL with station, we cannot break compatibility
  */
-$station = '';
-if (isset($_GET["station"])) {
-  $station = $_GET["station"];
-  $mapurl = $nagvis_uri . '?mod=Map&context_menu=0&hover_menu=1&header_menu=0&show=' . $_GET["station"];
+$currentMap = '';
+if (isset($_GET["map"])) {
+  $currentMap = $_GET["map"];
+  $mapurl = $nagvis_uri . '?mod=Map&context_menu=0&hover_menu=1&header_menu=0&show=' . $_GET["map"];
 } else {
-  if (isset($listMap[0])) {
-    $mapurl = $nagvis_uri . '?mod=Map&context_menu=0&hover_menu=1&header_menu=0&show=' . $listMap[0];
+  if (isset($_GET["station"])) {
+    $currentMap = $_GET["station"];
+    $mapurl = $nagvis_uri . '?mod=Map&context_menu=0&hover_menu=1&header_menu=0&show=' . $_GET["station"];
+  } else {
+    if (isset($listMap[0])) {
+      $mapurl = $nagvis_uri . '?mod=Map&context_menu=0&hover_menu=1&header_menu=0&show=' . $listMap[0];
+    }
   }
 }
 
@@ -101,7 +108,7 @@ $tpl = initSmartyTpl($path, $tpl);
 $tpl->assign('listmap', $listMap);
 $tpl->assign('nagvis_uri', $nagvis_uri);
 $tpl->assign('mapurl', $mapurl);
-$tpl->assign('station', $station);
+$tpl->assign('currentMap', $currentMap);
 
 $tpl->display('nagvis.ihtml');
 

@@ -135,7 +135,7 @@ Edit */usr/local/nagvis/nagvis.ini.php* (comments have been removed in the file 
   hostgroupurl=
   serviceurl="[htmlcgi]/main.php?p=20201&o=svcd&host_name=[host_name]&service_description=[service_description]&poller=&hostgroup=&output_search=" 
   servicegroupurl=
-  mapurl="[htmlcgi]/main.php?p=403&station=[map_name]" 
+  mapurl="[htmlcgi]/main.php?p=403&map=[map_name]" 
   view_template="default" 
   label_show=1
   
