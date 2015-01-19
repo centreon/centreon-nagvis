@@ -168,13 +168,13 @@ Now, you should be able to create new maps in NagVis, and use drag and drop to a
 
 Centreon objects should appear in NagVis
 
-.. image:: _static/centreon_integration.png
+.. image:: ../_static/centreon_integration.png
 
 When displaying maps, you should get this kind of status popup (here on a service):
 
-.. image:: _static/result1.png
+.. image:: ../_static/result1.png
 
 you get the same kind op popup on a map:
 
-.. image:: _static/result2.png
+.. image:: ../_static/result2.png
 

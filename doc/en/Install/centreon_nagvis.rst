@@ -15,7 +15,7 @@ Check default NagVis location in *Administration > Nagvis* (*/usr/local/nagvis/s
 Add a new "centreon_nagvis" user in NagVis administration (this will populate */usr/local/nagvis/etc/auth.db* accordingly, which is the SQLite DB used by NagVis).
 Grant him the "Users (read only)" role.
 
-.. image:: _static/centreon_nagvis.png
+.. image:: ../_static/centreon_nagvis.png
 
 Edit */usr/local/nagvis/share/server/core/defines/global.php*:
 
