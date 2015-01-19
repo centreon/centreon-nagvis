@@ -21,10 +21,6 @@ If your platform is based on "Centreon Enterprise Server", you just have to inst
 
  # yum install centreon-nagvis
 
-.. warning::
-
- Follow the procedure under «root» privileges.
-
 Package install
 ---------------
 
