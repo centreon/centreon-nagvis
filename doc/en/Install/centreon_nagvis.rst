@@ -8,6 +8,54 @@ This module will:
 
 Install the module either by getting the source on the forge or using RPM through the YUM repository of CES.
 
+Install for Centreon Enterprise Server
+--------------------------------------
+
+If your platform is based on "Centreon Enterprise Server", you just have to install the Centreon-Nagvis Package :
+
+::
+
+ # yum install centreon-nagvis
+
+
+
+Package install
+---------------
+
+Packages are provided by MERETHIS and are available on the download Web platform.
+
+.. warning::
+
+ Follow the procedure under «root» privileges.
+
+You have to extract the package on the correct directory
+
+
+Web install
+-----------
+
+The next step of the installation of the module is to be done through the Web user interface of Centreon. Navigate to the module management page :
+
+::
+
+ Administration > Modules
+
+Click on the installation icon of the « centreon-nagvis » module :
+
+.. image:: ../_static/Install_web_1.png
+    :width: 0.3228in
+    :height: 0.2193in
+
+
+.. image:: ../_static/Install_web_2.png
+    :width: 6.3957in
+    :height: 1.3862in
+
+.. image:: ../_static/Install_web_3.png
+    :width: 6.5937in
+    :height: 1.7083in
+
+
 After installation, you can activate the module on Centreon web interface *Administration > Modules*
 
 Check default NagVis location in *Administration > Nagvis* (*/usr/local/nagvis/share*).
