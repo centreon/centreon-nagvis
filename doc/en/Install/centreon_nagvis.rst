@@ -1,5 +1,5 @@
-Centreon NagVis module installation
-===================================
+Centreon NagVis module
+======================
 
 This module will:
 

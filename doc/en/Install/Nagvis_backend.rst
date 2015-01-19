@@ -1,33 +1,12 @@
 NagVis backend installation
 ============================
-  
-..  Requirement
-  -----------
-  
-  NagVis must be installed in the same server of Centreon.
-  
-  Configure NagVis for Centreon
-  -----------------------------
-  
-  For use the same authentification and session between Centreon and NagVis, you will change in file *nagvis/share/server/core/defines/global.php*, the define variable **SESSION_NAME** to **PHPSESSID**,
-  and the variable **sesscookiepath** to **/** (slash) in *nagvis/etc/nagvis.ini.php*;
-  
-  Install the Centreon module
-  ---------------------------
-  
-  Extract the package and run the installer::
-  
-    $ tar zxf centreon-nagvis-x.x.x.tar.gz
-    $ cd centreon-nagvis-x.x.x
-    $ ./install.sh
-  
-  After installation, you can activate the module on Centreon web interface *Administration > Modules*
-  
 
 Download NagVis 1.7.x archive and extract it in */usr/local/nagvis*
   
 Configure vhosts so that /nagvis URL are available.
+
 You can use the template provided by NagVis, on CES, it is stored it in */etc/httpd/conf.d/11-nagvis.conf*, close to *10-centreon.conf* (comments have been removed in the file below):
+
 ::
 
   Alias /nagvis "/usr/local/nagvis/share" 
@@ -57,6 +36,7 @@ You can use the template provided by NagVis, on CES, it is stored it in */etc/ht
   </Directory>
 
 Clone the Broker backend provided by this forge:
+
 ::
 
   # cd /tmp
@@ -66,6 +46,7 @@ Clone the Broker backend provided by this forge:
   # cp GlobalBackendcentreonbroker.php /usr/local/nagvis/share/server/core/classes/
 
 Create some directories needed by NagVis:
+
 ::
 
   # mkdir etc/profiles
@@ -78,10 +59,11 @@ Create some directories needed by NagVis:
   We will describe textual configuration in this documentation.
 
 Edit */usr/local/nagvis/nagvis.ini.php* (comments have been removed in the file below):
+
 ::
 
   [global]
-  authmodule="CoreAuthModSQLite" 
+  authmodule="CoreAuthModSQLite"
   authorisationmodule="CoreAuthorisationModSQLite" 
   dateformat="Y-m-d H:i:s" 
   file_group="apache" 
