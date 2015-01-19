@@ -42,12 +42,7 @@ The next step of the installation of the module is to be done through the Web us
 
  Administration > Modules
 
-Click on the installation icon of the « centreon-nagvis » module :
-
-.. image:: ../_static/Install_web_1.png
-    :width: 0.3228in
-    :height: 0.2193in
-
+Click on the installation icon of the « centreon-nagvis » module : |add|
 
 .. image:: ../_static/Install_web_2.png
     :width: 6.3957in
@@ -57,3 +52,4 @@ Click on the installation icon of the « centreon-nagvis » module :
     :width: 6.5937in
     :height: 1.7083in
 
+.. |add|	image:: ../_static/Install_web_1.png
