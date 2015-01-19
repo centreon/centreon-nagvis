@@ -8,6 +8,10 @@ This module will:
 
 Install the module either by getting the source on the forge or using RPM through the YUM repository of CES.
 
+.. warning::
+
+ Follow the procedures under «root» privileges.
+
 Install for Centreon Enterprise Server
 --------------------------------------
 
