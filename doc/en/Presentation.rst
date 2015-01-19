@@ -13,30 +13,3 @@ Then an additionnal Centreon module called "centreon-nagvis" (https://forge.cent
 
 	that map edition is only possible through the usual NagVis UI, there is not map edition in Centreon.
 
-
-Requirements
-------------
-
-+----------------------------+-------------------------+
-| **Softwares**              | **Compatible Versions** |
-|                            |                         |
-+----------------------------+-------------------------+
-| **Centreon**               | 2.5.x                   |
-|                            |                         |
-+----------------------------+-------------------------+
-| **Centreon-Nagvis**        | 1.0.x                   |
-|                            |                         |
-+----------------------------+-------------------------+
-| **Nagvis**                 | 1.7.10                  |
-|                            |                         |
-+----------------------------+-------------------------+
-| **SQLite**                 | 3.x                     |
-|                            |                         |
-+----------------------------+-------------------------+
-
-.. note::
-
-	NagVis must be installed on the Centreon server as the web interface is reading NagVis maps (stored as \*.cfg files).
-
-	Graphviz may also be needed depending on the maps. Please refer to the NagVis installation for more information.
-
