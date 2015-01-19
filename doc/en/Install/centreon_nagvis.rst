@@ -17,18 +17,20 @@ If your platform is based on "Centreon Enterprise Server", you just have to inst
 
  # yum install centreon-nagvis
 
+.. warning::
 
+ Follow the procedure under «root» privileges.
 
 Package install
 ---------------
 
 Packages are provided by MERETHIS and are available on the download Web platform.
 
-.. warning::
+You have to extract the archives on you centreon module directory.
 
- Follow the procedure under «root» privileges.
+::
 
-You have to extract the package on the correct directory
+ # tar xzf centreon-nagvis-1.0.3.tar.gz
 
 
 Web install
