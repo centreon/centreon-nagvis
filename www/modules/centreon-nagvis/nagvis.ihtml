@@ -11,8 +11,20 @@ html, body {
 .map {
   width: 100%;
 }
+#error {
+    border: 1px solid red;
+    background: lightsalmon;
+    padding: 5px;
+}
 </style>
 {/literal}
+
+{if $error}
+<div id="error"><img src='./img/icones/16x16/warning.gif'>{$error}</div>
+{/if}
+
+{if not empty($listmap)}
+
 <div class="select-map">
   <select name='view'>
   {foreach from=$listmap item=map}
@@ -62,3 +74,5 @@ function loadMap() {
 }
 </script>
 {/literal}
+
+{/if}
