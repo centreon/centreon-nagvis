@@ -21,11 +21,17 @@ $attrsTextLong = array("size" => "50");
 $form = new HTML_QuickForm('Form', 'post', '?p=' . $p);
 $form->addElement('header', 'title', _('Centreon Nagvis configuration'));
 $form->addElement('header', 'information', _('Nagvis information'));
+$form->addElement('header', 'information2', _('Nagvis authentication'));
+
 $form->addElement('text', 'centreon_nagvis_uri', _('Nagvis URI'), $attrsTextLong);
 $form->addElement('text', 'centreon_nagvis_path', _('Nagvis Path'), $attrsTextLong);
+$form->addElement('select', 'centreon_nagvis_auth', _("Single NagVis user auth or Centreon user auth ? "), array("single" => "Single User", "centreon" => "Centreon User"));
+$form->addElement('text', 'centreon_nagvis_single_user', _('Nagvis user name'), $attrsTextLong);
 
 $form->addRule('centreon_nagvis_uri', _('Compulsory field'), 'required');
 $form->addRule('centreon_nagvis_path', _('Compulsory field'), 'required');
+$form->addRule('centreon_nagvis_auth', _('Compulsory field'), 'required');
+$form->addRule('centreon_nagvis_single_user', _('Compulsory field'), 'required');
 $form->registerRule('exist', 'callback', 'nagvisInstall');
 
 $form->addRule('centreon_nagvis_path', _('Directory does not exist'), 'exist');
@@ -35,10 +41,12 @@ $form->addElement('submit', 'submitC', _("Save"));
 $form->addElement('reset', 'reset', _("Reset"));
 
 if ($form->validate()) {
-  $values = $form->getSubmitValues();
-  $queryInsert = 'UPDATE `options` SET `value` = "%s" WHERE `key` = "%s"';
-  $pearDB->query(sprintf($queryInsert, $pearDB->escape($values['centreon_nagvis_uri']),  'centreon_nagvis_uri'));
-  $pearDB->query(sprintf($queryInsert, $pearDB->escape($values['centreon_nagvis_path']), 'centreon_nagvis_path'));
+    $values = $form->getSubmitValues();
+    $queryInsert = 'UPDATE `options` SET `value` = "%s" WHERE `key` = "%s"';
+    $pearDB->query(sprintf($queryInsert, $pearDB->escape($values['centreon_nagvis_uri']),  'centreon_nagvis_uri'));
+    $pearDB->query(sprintf($queryInsert, $pearDB->escape($values['centreon_nagvis_path']), 'centreon_nagvis_path'));
+    $pearDB->query(sprintf($queryInsert, $pearDB->escape($values['centreon_nagvis_auth']), 'centreon_nagvis_auth'));
+    $pearDB->query(sprintf($queryInsert, $pearDB->escape($values['centreon_nagvis_single_user']), 'centreon_nagvis_single_user'));
 }
 
 /*
@@ -46,7 +54,7 @@ if ($form->validate()) {
  */
 if (!isset($values)) {
   $values = array();
-  $query = 'SELECT `key`, `value` FROM `options` WHERE `key` IN ("centreon_nagvis_uri", "centreon_nagvis_path")';
+  $query = 'SELECT `key`, `value` FROM `options` WHERE `key` IN ("centreon_nagvis_uri", "centreon_nagvis_path", "centreon_nagvis_auth", "centreon_nagvis_single_user")';
   $res = $pearDB->query($query);
   if (!PEAR::isError($res)) {
     while ($row = $res->fetchRow()) {

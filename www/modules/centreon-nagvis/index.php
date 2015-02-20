@@ -7,7 +7,7 @@ if (!isset($centreon)) {
 $path = dirname(__FILE__);
 
 /* Get nagvis path */
-$query = 'SELECT `key`, `value` FROM `options` WHERE `key` IN ("centreon_nagvis_path", "centreon_nagvis_uri")';
+$query = 'SELECT `key`, `value` FROM `options` WHERE `key` IN ("centreon_nagvis_path", "centreon_nagvis_uri", "centreon_nagvis_auth", "centreon_nagvis_single_user")';
 $res = $pearDB->query($query);
 if (PEAR::isError($res)) {
   echo '<div class="error">Error when getting information</div>';
@@ -17,11 +17,15 @@ if (PEAR::isError($res)) {
 $nagvis_path = null;
 $nagvis_uri = null;
 while ($row = $res->fetchRow()) {
-  if ($row['key'] == 'centreon_nagvis_path') {
-    $nagvis_path = $row['value'];
-  } elseif ($row['key'] == 'centreon_nagvis_uri') {
-    $nagvis_uri = $row['value'];
-  }
+    if ($row['key'] == 'centreon_nagvis_path') {
+        $nagvis_path = $row['value'];
+    } elseif ($row['key'] == 'centreon_nagvis_uri') {
+        $nagvis_uri = $row['value'];
+    } elseif ($row['key'] == 'centreon_nagvis_auth') {
+        $centreon_nagvis_auth = $row['value'];
+    } elseif ($row['key'] == 'centreon_nagvis_single_user') {
+        $centreon_nagvis_single_user = $row['value'];
+    }
 }
 
 if (is_null($nagvis_path) || is_null($nagvis_uri)) {
@@ -39,8 +43,8 @@ function debug($msg) {
   fclose($fh);
 }
 
-// FIXME Should be a pref
-$single_nagvis_user = false;
+// Loading NagVis authentication type from options
+$single_nagvis_user = $centreon_nagvis_auth === 'single';
 
 /* Fix bad usage */
 $_SERVER['SCRIPT_FILENAME'] = $nagvis_path . 'frontend/nagvis-js/index.php';
@@ -66,8 +70,8 @@ $centreonLang->bindLang('messages');
 $core = GlobalCore::getInstance();
 
 if ($single_nagvis_user) {
-    // FIXME Should be a pref
-    $userCentreon = 'centreon_nagvis2';
+    // Value from options
+    $userCentreon = $centreon_nagvis_single_user;
 } else {
     $userCentreon = $centreon->user->alias;
 }
