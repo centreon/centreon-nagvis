@@ -14,3 +14,4 @@ Contents:
    Prerequisites
    Install/index
    User
+   Release_Notes
