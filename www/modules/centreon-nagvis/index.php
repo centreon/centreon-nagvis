@@ -1,16 +1,21 @@
 <?php
 
+require_once $centreon_path . "/www/class/centreonLang.class.php";
+$centreonLang = new CentreonLang($centreon_path, $centreon);
+$centreonLang->bindLang();
+$centreonLang->bindLang('messages');
+
 if (!isset($centreon)) {
   exit();
 }
 
 $path = dirname(__FILE__);
 
-/* Get nagvis path */
+/* Read module options */
 $query = 'SELECT `key`, `value` FROM `options` WHERE `key` IN ("centreon_nagvis_path", "centreon_nagvis_uri", "centreon_nagvis_auth", "centreon_nagvis_single_user")';
 $res = $pearDB->query($query);
 if (PEAR::isError($res)) {
-  echo '<div class="error">Error when getting information</div>';
+  echo '<div class="error">'._('Error when getting Centreon-NagVis module options').'</div>';
   exit();
 }
 
@@ -29,18 +34,12 @@ while ($row = $res->fetchRow()) {
 }
 
 if (is_null($nagvis_path) || is_null($nagvis_uri)) {
-  echo '<div class="error">Error when getting information</div>';
+  echo '<div class="error">'._('Error when getting NagVis path').'</div>';
   exit();
 }
 
 if (substr($nagvis_path, -1) != '/') {
   $nagvis_path = $nagvis_path . '/';
-}
-
-function debug($msg) {
-  $fh = fopen(DEBUGFILE, 'a');
-  fwrite($fh, utf8_encode(microtime_float().' '.$msg."\n"));
-  fclose($fh);
 }
 
 // Loading NagVis authentication type from options
@@ -51,6 +50,7 @@ $_SERVER['SCRIPT_FILENAME'] = $nagvis_path . 'frontend/nagvis-js/index.php';
 $tmpdir = getcwd();
 chdir($nagvis_path . 'frontend/nagvis-js/');
 
+// We now know where NagVis is located, so we can load it
 require_once $nagvis_path . 'server/core/defines/global.php';
 require_once $nagvis_path . 'server/core/defines/matches.php';
 require_once $nagvis_path . 'server/core/functions/autoload.php';
@@ -58,21 +58,15 @@ require_once $nagvis_path . 'server/core/classes/CoreExceptions.php';
 require_once $nagvis_path . 'server/core/functions/nagvisErrorHandler.php';
 require_once $nagvis_path . 'server/core/functions/core.php';
 
-// FIXME Various requires should probably be initialized on top
-require_once $centreon_path . "/www/class/centreonLang.class.php";
-$centreonLang = new CentreonLang($centreon_path, $centreon);
-$centreonLang->bindLang();
-$centreonLang->bindLang('messages');
 
-/*
- * Init Global
- */
+/* Init NagVis */
 $core = GlobalCore::getInstance();
 
 if ($single_nagvis_user) {
-    // Value from options
+    // Same user for all, read from options
     $userCentreon = $centreon_nagvis_single_user;
 } else {
+    // User connected in Centreon
     $userCentreon = $centreon->user->alias;
 }
 
@@ -80,7 +74,7 @@ $error = '';
 $listMap = array();
 
 /* 
- * Create nagvis session 
+ * Create nagvis session to get list of available maps for the user
  */
 $AUTH = new CoreAuthHandler();
 if ($AUTH->checkUserExists($userCentreon)) {
@@ -160,5 +154,11 @@ $tpl->assign('mapurl', $mapurl);
 $tpl->assign('currentMap', $currentMap);
 
 $tpl->display('nagvis.ihtml');
+
+function debug($msg) {
+    $fh = fopen(DEBUGFILE, 'a');
+    fwrite($fh, utf8_encode(microtime_float().' '.$msg."\n"));
+    fclose($fh);
+}
 
 ?>
