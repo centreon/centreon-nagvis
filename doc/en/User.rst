@@ -46,11 +46,11 @@ If you are using a single user for all Centreon users, the easiest setup is to g
 
 But you can configure users to only have access to some maps by defining a new role, like "Role1" in the example below.
 
-.. image:: _static/centreon_nagvis_role_creation.png
+.. image:: _static/centreon_nagvis_create_role.png
 
 Then you can grant this role to a user like "user1"
 
-.. image:: _static/centreon_nagvis_role_grant.png
+.. image:: _static/centreon_nagvis_grant_role.png
 
 .. warning::
 
