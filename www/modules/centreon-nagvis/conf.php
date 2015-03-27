@@ -1,7 +1,7 @@
 <?php
 $module_conf['centreon-nagvis']['rname'] = 'Centreon NagVis';
 $module_conf['centreon-nagvis']['name'] = 'centreon-nagvis';
-$module_conf['centreon-nagvis']['mod_release'] = '1.1';
+$module_conf['centreon-nagvis']['mod_release'] = '1.1.1';
 $module_conf['centreon-nagvis']['infos'] = 'NagVis module for Centreon';
 $module_conf['centreon-nagvis']['is_removeable'] = '1';
 $module_conf['centreon-nagvis']['author'] = 'Centreon';
