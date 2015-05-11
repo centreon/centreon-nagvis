@@ -3,11 +3,6 @@
 html, body {
   height: 100%;
 }
-
-.select-map {
-  padding-bottom: 10px;
-}
-
 .map {
   width: 100%;
 }
@@ -25,13 +20,20 @@ html, body {
 
 {if not empty($listmap)}
 
-<div class="select-map">
-  <select name='view'>
-  {foreach from=$listmap item=map}
-    <option{if $currentMap == $map} selected="selected"{/if}>{$map}</option>
-  {/foreach}
-  </select>
-</div>
+<table class="ToolbarTable">
+  <tr class="ToolbarTR">
+    <td class="Toolbar_TDSelectAction_Top">
+      <span class="consol_button"><a id="JS_nagvis_refresh" href="#" onclick="javascript:jQuery('#nagvis_select_map').change(); return false;"><img src='./img/icones/16x16/refresh.gif' alt='Refresh' title='Refresh'></a></span>
+      <span class="consol_button">
+        <select id="nagvis_select_map">
+        {foreach from=$listmap item=map}
+          <option{if $currentMap == $map} selected="selected"{/if}>{$map}</option>
+        {/foreach}
+        </select>
+      </span>
+    </td>
+  </tr>
+</table>
 
 <iframe class="map" id="map" src="{$mapurl}" frameborder="0"></iframe>
 
@@ -55,13 +57,13 @@ function resizeMap() {
 
 jQuery(function() {
   resizeMap();
-  jQuery('.select-map > select').change(loadMap);
+  jQuery('#nagvis_select_map').change(loadMap);
 });
 
 jQuery(window).resize(resizeMap);
 
 function loadMap() {
-  var mapname = jQuery('.select-map > select').val();
+  var mapname = jQuery('#nagvis_select_map').val();
   var mapData = {
     mod: 'Map',
     context_menu: 0,
