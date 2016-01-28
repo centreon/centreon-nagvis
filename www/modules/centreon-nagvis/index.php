@@ -155,10 +155,4 @@ $tpl->assign('currentMap', $currentMap);
 
 $tpl->display('nagvis.ihtml');
 
-function debug($msg) {
-    $fh = fopen(DEBUGFILE, 'a');
-    fwrite($fh, utf8_encode(microtime_float().' '.$msg."\n"));
-    fclose($fh);
-}
-
 ?>
