@@ -57,7 +57,7 @@ function resizeMap() {
 
 jQuery(function() {
   resizeMap();
-  jQuery('#nagvis_select_map').change(loadMap);
+  jQuery('#nagvis_select_map').change(loadMap).select2();
 });
 
 jQuery(window).resize(resizeMap);
