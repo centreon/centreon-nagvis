@@ -11,14 +11,11 @@ function nagvisInstall($dir) {
   return false;
 }
 
-require_once 'HTML/QuickForm.php';
-require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
-
 $path = './modules/centreon-nagvis/';
 
 $attrsTextLong = array("size" => "50");
 
-$form = new HTML_QuickForm('Form', 'post', '?p=' . $p);
+$form = new HTML_QuickFormCustom('Form', 'post', '?p=' . $p);
 $form->addElement('header', 'title', _('Centreon Nagvis configuration'));
 $form->addElement('header', 'information', _('Nagvis information'));
 $form->addElement('header', 'information2', _('Nagvis authentication'));
