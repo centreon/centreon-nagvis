@@ -57,7 +57,7 @@ if (!isset($values)) {
   try {
       $res = $pearDB->query($query);
   } catch (\PDOException $e) {
-      // do nothing to keep same behaviour thant previous version
+      // do nothing to keep same behaviour as previous version
   }
   while ($row = $res->fetch()) {
       $values[$row['key']] = $row['value'];
