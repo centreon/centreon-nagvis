@@ -12,11 +12,13 @@ if (!isset($centreon)) {
 $path = dirname(__FILE__);
 
 /* Read module options */
-$query = 'SELECT `key`, `value` FROM `options` WHERE `key` IN ("centreon_nagvis_path", "centreon_nagvis_uri", "centreon_nagvis_auth", "centreon_nagvis_single_user")';
+$query = 'SELECT `key`, `value` FROM `options` '
+    . 'WHERE `key` IN '
+    . '("centreon_nagvis_path", "centreon_nagvis_uri", "centreon_nagvis_auth", "centreon_nagvis_single_user")';
 try {
     $res = $pearDB->query($query);
 } catch (\PDOException $e) {
-    echo '<div class="error">'._('Error when getting Centreon-NagVis module options').'</div>';
+    echo '<div class="error">' . _('Error when getting Centreon-NagVis module options') . '</div>';
     exit();
 }
 

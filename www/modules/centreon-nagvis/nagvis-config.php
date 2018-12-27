@@ -51,14 +51,16 @@ if ($form->validate()) {
  */
 if (!isset($values)) {
   $values = array();
-  $query = 'SELECT `key`, `value` FROM `options` WHERE `key` IN ("centreon_nagvis_uri", "centreon_nagvis_path", "centreon_nagvis_auth", "centreon_nagvis_single_user")';
+  $query = 'SELECT `key`, `value` FROM `options` '
+      . 'WHERE `key` IN '
+      . '("centreon_nagvis_uri", "centreon_nagvis_path", "centreon_nagvis_auth", "centreon_nagvis_single_user")';
   try {
       $res = $pearDB->query($query);
   } catch (\PDOException $e) {
       // do nothing to keep same behaviour thant previous version
   }
   while ($row = $res->fetch()) {
-    $values[$row['key']] = $row['value'];
+      $values[$row['key']] = $row['value'];
   }
 }
 $form->setDefaults($values);
