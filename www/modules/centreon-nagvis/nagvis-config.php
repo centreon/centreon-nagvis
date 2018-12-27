@@ -11,14 +11,11 @@ function nagvisInstall($dir) {
   return false;
 }
 
-require_once 'HTML/QuickForm.php';
-require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
-
 $path = './modules/centreon-nagvis/';
 
 $attrsTextLong = array("size" => "50");
 
-$form = new HTML_QuickForm('Form', 'post', '?p=' . $p);
+$form = new HTML_QuickFormCustom('Form', 'post', '?p=' . $p);
 $form->addElement('header', 'title', _('Centreon Nagvis configuration'));
 $form->addElement('header', 'information', _('Nagvis information'));
 $form->addElement('header', 'information2', _('Nagvis authentication'));
@@ -54,12 +51,16 @@ if ($form->validate()) {
  */
 if (!isset($values)) {
   $values = array();
-  $query = 'SELECT `key`, `value` FROM `options` WHERE `key` IN ("centreon_nagvis_uri", "centreon_nagvis_path", "centreon_nagvis_auth", "centreon_nagvis_single_user")';
-  $res = $pearDB->query($query);
-  if (!PEAR::isError($res)) {
-    while ($row = $res->fetchRow()) {
+  $query = 'SELECT `key`, `value` FROM `options` '
+      . 'WHERE `key` IN '
+      . '("centreon_nagvis_uri", "centreon_nagvis_path", "centreon_nagvis_auth", "centreon_nagvis_single_user")';
+  try {
+      $res = $pearDB->query($query);
+  } catch (\PDOException $e) {
+      // do nothing to keep same behaviour as previous version
+  }
+  while ($row = $res->fetch()) {
       $values[$row['key']] = $row['value'];
-    }
   }
 }
 $form->setDefaults($values);
