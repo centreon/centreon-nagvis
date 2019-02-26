@@ -24,6 +24,7 @@ html, body {
   <tr class="ToolbarTR">
     <td class="Toolbar_TDSelectAction_Top">
       <span class="consol_button"><a id="JS_nagvis_refresh" href="#" onclick="javascript:jQuery('#nagvis_select_map').change(); return false;"><img src='./img/icones/16x16/refresh.gif' alt='Refresh' title='Refresh'></a></span>
+      <span class="consol_button"><a id="JS_nagvis_back" href="#" onclick="javascript:window.history.back(); "><img src='./img/icones/16x16/arrow_left_blue.gif' alt='Back' title='Back'></a></span>
       <span class="consol_button">
         <select id="nagvis_select_map">
         {foreach from=$listmap item=map}
